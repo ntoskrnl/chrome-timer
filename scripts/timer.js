@@ -9,7 +9,7 @@ class Timer {
     }
 
     $body = $('\
-        <div id="jira-timer" style="position: fixed; bottom: 10px; right: 10px; width: 280px; height: 112px; margin: 0; padding: 0; z-index: 100">\
+        <div id="jira-timer" style="position: fixed; bottom: 10px; right: 10px; width: 280px; height: 112px; margin: 0; padding: 0; z-index: 1000">\
             <canvas width=280 height=112></canvas>\
         </div>\
     ');
