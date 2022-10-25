@@ -331,10 +331,10 @@ function initialize() {
         }
     )
 
-    listenToSettingChanges();
+    listenToSettingChanges(timer);
 }
 
-function listenToSettingChanges() {
+function listenToSettingChanges(timer) {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         console.log("Event: ", request);
         if (request.operation) {
