@@ -23,9 +23,7 @@
   },
   "permissions": [
     "tabs",
-    "activeTab",
-    "storage",
-    "nativeMessaging"
+    "storage"
   ],
   "icons": {
     "128": "timer.png"
