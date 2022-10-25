@@ -174,8 +174,9 @@ class JiraSwimlanesDetectionStrategy {
     init(timer) {
         if (this.initialized) return;
 
-        this.swimlanes = $('#ghx-pool.ghx-has-swimlanes .ghx-swimlane');
-        this.swimlanes.on('click', () => {
+        let swimlanes = $('#ghx-pool.ghx-has-swimlanes .ghx-swimlane');
+        swimlanes.on('click', () => {
+            console.log("Swimlane clicked: ", this);
             setTimeout(() => { this.detect(timer); }, 500);
         })
         this.initialized = true
@@ -187,7 +188,8 @@ class JiraSwimlanesDetectionStrategy {
 
     detect(timer) {
         if (!this.initialized) return;
-        let active = this.swimlanes.not('[class*="ghx-closed"]');
+        let swimlanes = $('#ghx-pool.ghx-has-swimlanes .ghx-swimlane');
+        let active = swimlanes.not('[class*="ghx-closed"]');
         if (active.length === 1) {
             timer.start();
         } else {
@@ -306,23 +308,31 @@ class TimeRenderer {
 
 }
 
-let timer = new Timer();
+setTimeout(() => {
+    initialize();
+}, 1000);
 
-// get settings
-chrome.runtime.sendMessage(
-    { "operation": "get_settings" },
-    (response) => {
-        console.log("Resp: ", response);
-        if (response) {
-            timer.setDetectionProfile(response.profile);
-            if (response.enabled) {
-                timer.init();
-            } else {
-                timer.destroy();
+function initialize() {
+    let timer = new Timer();
+
+    // get settings
+    chrome.runtime.sendMessage(
+        { "operation": "get_settings" },
+        (response) => {
+            console.log("Resp: ", response);
+            if (response) {
+                timer.setDetectionProfile(response.profile);
+                if (response.enabled) {
+                    timer.init();
+                } else {
+                    timer.destroy();
+                }
             }
         }
-    }
-)
+    )
+
+    listenToSettingChanges();
+}
 
 function listenToSettingChanges() {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -341,5 +351,4 @@ function listenToSettingChanges() {
     });
 }
 
-listenToSettingChanges();
 
