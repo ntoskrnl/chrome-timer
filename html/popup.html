@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./popup.css"/>
+</head>
+<body>
+<p>
+    <input id="enabled" type="checkbox" />
+    <label for="enabled">Enabled</label>
+</p>
+
+<p>
+    <label for="profile">Profile:</label>
+    <select id="profile">
+        <option value="manual">Manual</option>
+        <option value="jira-assignee-quick-filter">Jira Assignee Quick Filter</option>
+        <option value="jira-swim-lanes">Jira Swimlanes</option>
+    </select>
+</p>
+<script src="../scripts/lib/jquery-3.6.1.min.js" type="module"></script>
+<script src="./popup.js" type="module"></script>
+</body>
+</html>
